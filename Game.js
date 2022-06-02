@@ -1,32 +1,44 @@
 class Game{
-    constructor(){
+    constructor(p1name,p2name){
+        this.p1name = p1name;
+        this.p2name = p2name;
+
         this.cells = document.querySelectorAll(".cell");
-        this.cells.forEach(cell=>{
-            cell.addEventListener("click",(e)=>{
-                //prevents placing in a used square
-                if (this.gameboard.getCell(
-                    e.target.dataset.index
-                ) !== ""){
-                    return;
-                }
-
-                this.gameboard.setGameboard(
-                    e.target.dataset.index,
-                    this.currentPlayer.marker
-                )
-                if(this.checkGameOver()){
-                    console.log(`game over ${this.currentPlayer.name} wins`)
-                }
-                this.currentPlayer = this.swapTurn();
-            });
-        })
-
         this.gameboard = new GameBoard(this.cells);
+        //create this new function so that event listener can be removed
+        //and reference the correct this in the function
+        this.boundClickCell = (e) => this.clickCell(e);
+        this.cells.forEach(cell=>{
+            cell.addEventListener("click",this.boundClickCell);
+        })
+    }
+
+    clickCell(e){
+        //prevents placing in a used square
+        if (this.gameboard.getCell(
+            e.target.dataset.index
+        ) !== ""){
+            return;
+        }
+
+        this.gameboard.setGameboard(
+            e.target.dataset.index,
+            this.currentPlayer.marker
+        )
+        if(this.checkGameOver()){
+            console.log(`game over ${this.currentPlayer.name} wins`)
+            this.endGame();
+        }
+        if(this.checkDraw()){
+            console.log("draw");
+            this.endGame();
+        }
+        this.currentPlayer = this.swapTurn();
     }
     
     startGame(){
-        this.player1 = new Player("p1","X");
-        this.player2 = new Player("p2","O");
+        this.player1 = new Player(this.p1name,"X");
+        this.player2 = new Player(this.p2name,"O");
         this.currentPlayer = this.player1;
         this.gameboard.display();
     }
@@ -60,8 +72,42 @@ class Game{
                 }
             }
     }
+
+    checkDraw(){
+        let board = this.gameboard.getBoard();
+
+        for (let cell of board){
+            if (cell == ""){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    endGame(){
+        this.cells.forEach(cell=>{
+            cell.removeEventListener("click",this.boundClickCell);
+        })
+    }
 }
 
-const game = new Game();
-game.startGame();
+let modal = document.querySelector(".game-start-modal");
+let p1Input = document.querySelector("#p1name");
+let p2Input = document.querySelector("#p2name");
+function startGame(){
+    let p1name = p1Input.value;
+    let p2name = p2Input.value;
 
+    if (p1name && p2name){
+        modal.style.display = "none";
+        const game = new Game(p1name,p2name);
+        game.startGame();
+    }
+}
+
+function reset(){
+    startGame();
+}
+function changeMode(){
+    modal.style.display = "block";
+}

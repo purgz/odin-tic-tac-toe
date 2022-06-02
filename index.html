@@ -9,8 +9,17 @@
 </head>
 <body>
     <div id="header">
-
+        <h1>Tic Tac Toe</h1>
     </div>
+
+    <div class="game-start-modal">
+        <div class="modal-content">
+            <input id = "p1name" placeholder="x" type="text" text="Enter p1 name">
+            <input id = "p2name" placeholder="o" type="text" text="Enter p2 name">
+            <button onclick="startGame()">Start Game</button>
+        </div>
+    </div>
+
     <div id="main">
         <div class="gameBoard">
             <div class="cell" data-index="1"></div>
@@ -24,6 +33,8 @@
             <div class="cell" data-index="9"></div>
         </div>
 
+        <button onclick="reset()" class="reset">Reset</button>
+        <button class="change-mode" onclick="changeMode()">Change mode</button>
     </div>
 
     <div id="footer">
