@@ -25,5 +25,15 @@ class GameBoard {
     getBoard(){
         return this.#gameBoard;
     }
+
+    isFull(){
+        for(let i = 0;i < this.#gameBoard.length;i++){
+            if (this.#gameBoard[i] == ""){
+                return false;
+            }
+        }
+        console.log("full")
+        return true;
+    }
 }
 

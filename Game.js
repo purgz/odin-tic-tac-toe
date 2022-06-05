@@ -91,23 +91,3 @@ class Game{
     }
 }
 
-let modal = document.querySelector(".game-start-modal");
-let p1Input = document.querySelector("#p1name");
-let p2Input = document.querySelector("#p2name");
-function startGame(){
-    let p1name = p1Input.value;
-    let p2name = p2Input.value;
-
-    if (p1name && p2name){
-        modal.style.display = "none";
-        const game = new Game(p1name,p2name);
-        game.startGame();
-    }
-}
-
-function reset(){
-    startGame();
-}
-function changeMode(){
-    modal.style.display = "block";
-}
