@@ -24,3 +24,8 @@ function reset(){
 function changeMode(){
     modal.style.display = "block";
 }
+
+/*
+let newBoard = prepareBoard( ["O","","X","X","","X","","O","O"])
+console.log(minimax(newBoard,"O").index)
+*/

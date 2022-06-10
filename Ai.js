@@ -16,12 +16,13 @@ class Ai extends Game{
             e.target.dataset.index,
             this.currentPlayer.marker
         )
-        if(this.checkGameOver()){
+        console.log(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker))
+        if(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker)){
             console.log(`game over ${this.currentPlayer.name} wins`)
             this.endGame();
             return;
         }
-        if(this.checkDraw()){
+        if(emptyCells(this.gameboard.getBoard()).length == 0){
             console.log("draw");
             this.endGame();
             return;
@@ -32,25 +33,27 @@ class Ai extends Game{
 
     aiMove(){
       
-        let move;
-        do{
-            move = this.generateMove();
-        } while (this.gameboard.getCell(move)!=="" && !this.gameboard.isFull());
+        let move = this.generateMove();
        
         this.gameboard.setGameboard(move,this.currentPlayer.marker);
 
-        if(this.checkGameOver()){
+        if(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker)){
             console.log(`game over ${this.currentPlayer.name} wins`)
             this.endGame();
         }
-        if(this.checkDraw()){
+        if(emptyCells(this.gameboard.getBoard()).length == 0){
             console.log("draw");
             this.endGame();
         }
+        
         this.currentPlayer = this.swapTurn();
     }
 
     generateMove(){
-        return Math.round(Math.random()*(9-1)+1);
+        let board = prepareBoard(Array.from((this.gameboard.getBoard())))
+        console.log(board)
+        let move =  minimax(board,"O").index 
+        console.log(move);
+        return move + 1;
     }
 }

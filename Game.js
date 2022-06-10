@@ -25,11 +25,11 @@ class Game{
             e.target.dataset.index,
             this.currentPlayer.marker
         )
-        if(this.checkGameOver()){
+        if(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker)){
             console.log(`game over ${this.currentPlayer.name} wins`)
             this.endGame();
         }
-        if(this.checkDraw()){
+        if(emptyCells(this.gameboard.getBoard()).length == 0){
             console.log("draw");
             this.endGame();
         }
@@ -47,41 +47,6 @@ class Game{
         return this.currentPlayer == this.player1
             ?this.player2
             :this.player1
-    }
-
-
-    checkGameOver(){
-        let board = this.gameboard.getBoard();
-        const winConditions = [
-            [0,1,2],
-            [3,4,5],
-            [6,7,8],
-            [0,3,6],
-            [1,4,7],
-            [2,5,8],
-            [0,4,8],
-            [2,4,6]
-        ]
-
-        //check each combination
-        for (let combination of winConditions){
-            if (board[combination[0]] == board[combination[1]] &&
-                board[combination[0]] == board[combination[2]] &&
-                board[combination[0]] !== ""){
-                    return true;
-                }
-            }
-    }
-
-    checkDraw(){
-        let board = this.gameboard.getBoard();
-
-        for (let cell of board){
-            if (cell == ""){
-                return false;
-            }
-        }
-        return true;
     }
 
     endGame(){
