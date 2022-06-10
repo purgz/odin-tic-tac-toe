@@ -49,7 +49,7 @@ class Ai extends Game{
         }
         this.currentPlayer = this.swapTurn();
     }
-
+    //random move generator
     generateMove(){
         return Math.round(Math.random()*(9-1)+1);
     }
