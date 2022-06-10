@@ -48,7 +48,7 @@ class Ai extends Game{
         
         this.currentPlayer = this.swapTurn();
     }
-    //random move generator
+    //random move generator 
     generateMove(){
         let board = prepareBoard(Array.from((this.gameboard.getBoard())))
         console.log(board)
