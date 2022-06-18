@@ -14,11 +14,18 @@
 
     <div class="game-start-modal">
         <div class="modal-content">
-            <input id = "p1name" placeholder="x" type="text" text="Enter p1 name">
-            <input id = "p2name" placeholder="o" type="text" text="Enter p2 name">
-            <button onclick="startGame()">Start Game</button>
+            <div class="modal-items">
+                <div class="names">
+                    <p>Player Names</p>
+                    <input id = "p1name" placeholder="x" type="text" text="Enter p1 name">
+                    <input id = "p2name" placeholder="o" type="text" text="Enter p2 name">
+                </div>
+  
+                <button onclick="startGame()">Start Game</button>
+    
+                <button onclick="startGameAi()">Unbeatable AI</button>
+            </div>
 
-            <button onclick="startGameAi()">Play vs ai</button>
         </div>
     </div>
 
@@ -35,8 +42,12 @@
             <div class="cell" data-index="9"></div>
         </div>
 
-        <button onclick="reset()" class="reset">Reset</button>
-        <button class="change-mode" onclick="changeMode()">Change mode</button>
+        <div class="button-wrapper">
+            <button onclick="reset()" class="reset">Reset</button>
+            <button class="change-mode" onclick="changeMode()">Change mode</button>
+        </div>
+
+        <div class="result"></div>
     </div>
 
     <div id="footer">

@@ -4,6 +4,7 @@ class Game{
         this.p2name = p2name;
 
         this.cells = document.querySelectorAll(".cell");
+        this.result = document.querySelector(".result");
         this.gameboard = new GameBoard(this.cells);
         //create this new function so that event listener can be removed
         //and reference the correct this in the function
@@ -26,11 +27,11 @@ class Game{
             this.currentPlayer.marker
         )
         if(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker)){
-            console.log(`game over ${this.currentPlayer.name} wins`)
+            this.result.textContent = (`Game Over ${this.currentPlayer.name} wins`)
             this.endGame();
         }
         if(emptyCells(this.gameboard.getBoard()).length == 0){
-            console.log("draw");
+            this.result = "Draw"
             this.endGame();
         }
         this.currentPlayer = this.swapTurn();

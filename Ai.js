@@ -18,12 +18,12 @@ class Ai extends Game{
         )
         console.log(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker))
         if(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker)){
-            console.log(`game over ${this.currentPlayer.name} wins`)
+            this.result.textContent = (`Game Over ${this.currentPlayer.name} wins`)
             this.endGame();
             return;
         }
         if(emptyCells(this.gameboard.getBoard()).length == 0){
-            console.log("draw");
+            this.result.textContent = "Draw"
             this.endGame();
             return;
         }
@@ -38,11 +38,11 @@ class Ai extends Game{
         this.gameboard.setGameboard(move,this.currentPlayer.marker);
 
         if(checkGameOver(this.gameboard.getBoard(),this.currentPlayer.marker)){
-            console.log(`game over ${this.currentPlayer.name} wins`)
+            this.result.textContent = (`Game Over ${this.currentPlayer.name} wins`)
             this.endGame();
         }
         if(emptyCells(this.gameboard.getBoard()).length == 0){
-            console.log("draw");
+            this.result.textContent = "Draw"
             this.endGame();
         }
         
